@@ -20,11 +20,20 @@ module.exports = function(grunt) {
       }
     },
     qunit: {
-      files: ['test/**/*.html']
+      files: ['test/unit/**/*.html']
     },
     watch: {
       files: '<config:lint.files>',
       tasks: 'lint qunit'
+    },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          ui: 'tdd'
+        },
+        src: ['test/integration/tests.js']
+      }
     },
     jshint: {
       options: {
@@ -52,6 +61,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   // Default task.
   grunt.registerTask('default', ['jshint:src', 'qunit', 'uglify']);

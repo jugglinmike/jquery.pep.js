@@ -40,6 +40,9 @@
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-qunit": "~0.4.0"
+    "grunt-contrib-qunit": "~0.4.0",
+    "webdriver-sync": "^0.8.27",
+    "mocha": "^1.18.2",
+    "grunt-mocha-test": "^0.10.0"
   }
 }

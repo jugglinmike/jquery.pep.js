@@ -1,0 +1,12 @@
+/**
+ * Simple styling for test elements.
+ */
+.block {
+  width: 100px;
+  height: 100px;
+  border-width: 5px;
+
+  background-color: yellow;
+  border-color: #000;
+  border-style: solid;
+}

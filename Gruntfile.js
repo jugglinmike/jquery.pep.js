@@ -7,11 +7,20 @@ module.exports = function(grunt) {
     meta: {
     },
     qunit: {
-      files: ['test/**/*.html']
+      files: ['test/unit/**/*.html']
     },
     watch: {
       files: '<config:lint.files>',
       tasks: 'lint qunit'
+    },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          ui: 'bdd'
+        },
+        src: ['test/integration/tests.js']
+      }
     },
     jshint: {
       options: {
@@ -37,6 +46,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   // Default task.
   grunt.registerTask('default', ['jshint:src', 'qunit']);

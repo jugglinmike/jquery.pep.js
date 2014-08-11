@@ -1,6 +1,12 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  process.env.SAUCE_USERNAME = process.env.SAUCE_USERNAME || 'jugglinmike';
+  process.env.SAUCE_TUNNEL_ID = process.env.SAUCE_TUNNEL_ID ||
+    (new Date()).getTime();
+  // The Sauce access key is stored in an encrypted TravisCI configuration. It
+  // may be manually specified to schedule test runs from development machines.
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -47,6 +53,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-mocha-test');
+
+  grunt.registerTask('ci', ['default', 'mochaTest']);
 
   // Default task.
   grunt.registerTask('default', ['jshint:src', 'qunit']);

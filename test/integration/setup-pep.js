@@ -21,14 +21,10 @@ module.exports = function(driver, options) {
   var pepOptions = options.pepOptions || {};
   var pepTarget = options.pepTarget || '.pep';
 
-  return driver.executeScript(function(markup, target, options) {
-    if ('drag' in options) {
-      options.drag = new Function('return (' + options.drag + ')();');
-    }
-
+  return driver.executeScript(function(markup, target) {
     document.body.innerHTML = markup;
-    $(target).pep(options);
-  }, markup, pepTarget, pepOptions).then(function() {
+    $(target).pep();
+  }, markup, pepTarget).then(function() {
     return driver.findElements(webdriver.By.css('.pep'));
   });
 };

@@ -41,6 +41,8 @@
     "grunt-contrib-qunit": "~0.4.0",
     "grunt-mocha-test": "^0.10.0",
     "selenium-chromedriver": "0.0.1",
-    "selenium-webdriver": "^2.42.1"
+    "selenium-webdriver": "^2.42.1",
+    "sauce-tunnel": "^2.1.0",
+    "bluebird": "^2.2.2"
   }
 }

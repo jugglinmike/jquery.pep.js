@@ -1,44 +1,31 @@
 'use strict';
 var assert = require('assert');
-var path = require('path');
 
 var webdriver = require('selenium-webdriver');
-var chrome = require('selenium-webdriver/chrome');
-var chromeDriver = require('selenium-chromedriver');
 
+var setupDriver = require('./setup-driver');
 var setupPep = require('./setup-pep');
 
 describe('jQuery.pep', function() {
   var driver;
 
-  before(function() {
-    chrome.setDefaultService(
-      new chrome.ServiceBuilder(chromeDriver.path).build()
-    );
-  });
+  setupDriver();
 
   beforeEach(function() {
     var timeout = 20000;
-    var driver = this.driver = new webdriver.Builder()
-      .withCapabilities(webdriver.Capabilities.chrome())
-      .build();
 
-    this.timeout(timeout);
-
+    driver = this.driver;
     driver.manage().timeouts().implicitlyWait(1000);
 
-    return driver.get('file://' + path.resolve(__dirname, 'index.html'));
-  });
-
-  afterEach(function() {
-    return this.driver.quit();
+    this.timeout(timeout);
+    return driver.get('http://localhost:8031/test/integration/index.html');
   });
 
   describe('default behavior', function() {
     this.timeout(15 * 1000);
 
     beforeEach(function() {
-      return setupPep(this.driver, {
+      return setupPep(driver, {
           markup: '<div class="block pep"></div>',
         }).then(function(peps) {
           this.peps = peps;
@@ -46,7 +33,6 @@ describe('jQuery.pep', function() {
     });
 
     it('enables dragging and dropping', function() {
-      var driver = this.driver;
       var pep = this.peps[0];
       var origLocation;
 

@@ -10,6 +10,9 @@
     "url": "briangonzalez.org",
     "twitter": "@brianmgonzalez"
   },
+  "scripts": {
+    "test": "grunt ci"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:briangonzalez/jquery.pep.js.git"

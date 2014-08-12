@@ -23,7 +23,10 @@ module.exports = function(port) {
         filename += "/index.html";
       }
 
+      console.log('Request: ' + filename);
+
       fs.readFile(filename, "binary", function(err, file) {
+        console.log('response: ' + filename, 'error? ' + !!err);
         if(err) {
           response.writeHead(500, {"Content-Type": "text/plain"});
           response.write(err + "\n");

@@ -6,10 +6,17 @@ module.exports = function() {
   var sauceKey = env.SAUCE_ACCESS_KEY;
   var buildId = env.TRAVIS_BUILD_NUMBER;
   var tunnelId = env.TRAVIS_JOB_NUMBER;
+  var browserParts = (env.BROWSER || 'chrome').split(':')
+  var browser = {
+    name: browserParts[0],
+    version: browserParts[1]
+  };
   var driver, server;
 
   if (sauceName && sauceKey) {
-    require('./setup-driver-sauce')(sauceName, sauceKey, tunnelId, buildId);
+    require('./setup-driver-sauce')(
+      sauceName, sauceKey, browser, tunnelId, buildId
+    );
   } else {
     require('./setup-driver-local')();
   }

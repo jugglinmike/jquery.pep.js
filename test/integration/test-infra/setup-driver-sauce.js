@@ -96,11 +96,14 @@ function annotateJob(name, key, jobId, allPassed) {
 /**
  * @param {String} name The Sauce Labs account name to use to run the tests.
  * @param {String} key The Sauce Labs account key to use to run the tests.
+ * @param {Object} browser Description of browser to use
+ * @param {String} browser.name
+ * @param {String} [browser.version]
  * @param {String} [tunnelId] The identifier of the currently-active tunnel to
  *                            Sauce Labs, if any. When unspecified, a tunnel
  *                            will be created prior to running the tests.
  */
-module.exports = function(name, key, tunnelId, buildId) {
+module.exports = function(name, key, browser, tunnelId, buildId) {
   var allPassed = true;
   var capabilities;
 
@@ -109,12 +112,15 @@ module.exports = function(name, key, tunnelId, buildId) {
   }
 
   capabilities = {
-    browserName: 'googlechrome',
-    platform: 'Windows 2012',
+    browserName: browser.name,
     username: name,
     accessKey: key,
     'tunnel-identifier': tunnelId
   };
+
+  if (browser.version) {
+    capabilities.version = browser.version;
+  }
 
   if (buildId) {
     capabilities.build = buildId;

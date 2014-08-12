@@ -36,7 +36,7 @@ function setupSauceTunnel(name, key) {
   });
 
   after(function(done) {
-    this.timeout(60 * 1000);
+    this.timeout(61 * 1000);
     tunnel.stop(done);
   });
 

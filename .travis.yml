@@ -4,8 +4,8 @@ node_js:
 env:
   matrix:
   - BROWSER='firefox'
-  - BROWSER='firefox:10'
-  - BROWSER='firefox:20'
+  #- BROWSER='firefox:10'
+  #- BROWSER='firefox:20'
   # The SafariDriver does not implement the functionality required for
   # scripting drag-and-drop actions:
   # Issue 4136: [SafariDriver] implement the interactions API

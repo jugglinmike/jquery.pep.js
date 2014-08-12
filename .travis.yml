@@ -4,8 +4,8 @@ node_js:
 env:
   matrix:
   - BROWSER='firefox'
-  - BROWSER='firefox:3.5'
-  - BROWSER='firefox:3.6'
+  - BROWSER='firefox:4'
+  - BROWSER='firefox:7'
   - BROWSER='safari:5'
   - BROWSER='safari:6'
   - BROWSER='safari:7'

@@ -22,8 +22,8 @@ module.exports = function(driver, options) {
   var pepTarget = options.pepTarget || '.pep';
 
   return driver.executeScript(function(markup, target) {
-    document.body.innerHTML = markup;
-    $(target).pep();
+    $(document.body).html(markup)
+      .find(target).pep();
   }, markup, pepTarget).then(function() {
     return driver.findElements(webdriver.By.css(pepTarget));
   });

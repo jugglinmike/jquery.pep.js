@@ -1,10 +1,6 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
-  process.env.SAUCE_USERNAME = process.env.SAUCE_USERNAME || 'jugglinmike';
-  // The Sauce access key is stored in an encrypted TravisCI configuration. It
-  // may be manually specified to schedule test runs from development machines.
-
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),

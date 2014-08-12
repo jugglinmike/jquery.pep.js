@@ -2,7 +2,6 @@
 module.exports = function(grunt) {
 
   process.env.SAUCE_USERNAME = process.env.SAUCE_USERNAME || 'jugglinmike';
-  process.env.SAUCE_TUNNEL_ID = process.env.TRAVIS_JOB_NUMBER;
   // The Sauce access key is stored in an encrypted TravisCI configuration. It
   // may be manually specified to schedule test runs from development machines.
 

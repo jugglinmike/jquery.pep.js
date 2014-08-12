@@ -63,24 +63,30 @@ function setupSetupSauceTunnel(name, key) {
  *                            Sauce Labs, if any. When unspecified, a tunnel
  *                            will be created prior to running the tests.
  */
-function setupSauceDriver(name, key, tunnelId) {
+function setupSauceDriver(name, key, tunnelId, buildId) {
   var Tunnel = require("sauce-tunnel");
-  var tunnel;
+  var capabilities = {};
 
   if (!tunnelId) {
     tunnelId = setupSauceTunnel(name, key);
   }
 
+  capabilities = {
+    browserName: 'googlechrome',
+    platform: 'Windows 2012',
+    username: name,
+    accessKey: key,
+    'tunnel-identifier': tunnelId
+  };
+
+  if (buildId) {
+    capabilities.build = buildId;
+  }
+
   beforeEach(function() {
     this.driver = new webdriver.Builder()
       .usingServer('http://ondemand.saucelabs.com:80/wd/hub')
-      .withCapabilities({
-        browserName: 'googlechrome',
-        platform: 'Windows 2012',
-        username: name,
-        accessKey: key,
-        'tunnel-identifier': tunnelId
-      })
+      .withCapabilities(capabilities)
       .build();
   });
 
@@ -94,11 +100,12 @@ module.exports = function() {
   var env = process.env;
   var sauceName = env.SAUCE_USERNAME;
   var sauceKey = env.SAUCE_ACCESS_KEY;
-  var tunnelId = env.SAUCE_TUNNEL_ID;
+  var buildId = env.TRAVIS_BUILD_NUMBER;
+  var tunnelId = env.TRAVIS_JOB_NUMBER;
   var driver, server;
 
   if (sauceName && sauceKey) {
-    setupSauceDriver(sauceName, sauceKey, tunnelId);
+    setupSauceDriver(sauceName, sauceKey, tunnelId, buildId);
   } else {
     setupChromeDriver();
   }

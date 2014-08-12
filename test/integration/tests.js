@@ -22,7 +22,7 @@ describe('stuff', function() {
   });
 
   describe('basic operation', function() {
-    this.timeout(8000);
+    this.timeout(15 * 1000);
 
     beforeEach(function() {
       return setupPep(driver, {

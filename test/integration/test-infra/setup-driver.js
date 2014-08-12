@@ -26,7 +26,7 @@ module.exports = function() {
     driver = this.driver;
   });
 
-  afterEach(function() {
+  after(function() {
     return driver.quit();
   });
 };

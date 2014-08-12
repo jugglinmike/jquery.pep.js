@@ -8,9 +8,7 @@ module.exports = function() {
     chrome.setDefaultService(
       new chrome.ServiceBuilder(chromeDriver.path).build()
     );
-  });
 
-  beforeEach(function() {
     this.driver = new webdriver.Builder()
       .withCapabilities(webdriver.Capabilities.chrome())
       .build();

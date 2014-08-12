@@ -12,6 +12,7 @@ env:
   #- BROWSER='safari:5'
   #- BROWSER='safari:6'
   #- BROWSER='safari:7'
+  - BROWSER='internet explorer:6'
   - BROWSER='internet explorer:7'
   - BROWSER='internet explorer:8'
   - BROWSER='internet explorer:9'

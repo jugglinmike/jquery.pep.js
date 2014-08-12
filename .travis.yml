@@ -2,6 +2,21 @@ language: node_js
 node_js:
 - '0.10'
 env:
+  matrix:
+  - BROWSER='firefox'
+  - BROWSER='firefox:3.5'
+  - BROWSER='firefox:3.6'
+  - BROWSER='safari:5'
+  - BROWSER='safari:6'
+  - BROWSER='safari:7'
+  - BROWSER='internet explorer:7'
+  - BROWSER='internet explorer:8'
+  - BROWSER='internet explorer:9'
+  - BROWSER='internet explorer:10'
+  - BROWSER='internet explorer:11'
+  - BROWSER='opera:11'
+  - BROWSER='opera:12'
+  - BROWSER='chrome'
   global:
   - secure: iyx4vQYRw+Jk0SHb/Hm122hs4BjP20O6+oCYVNpWDl7L/M6928PInH7x9V9COa5xu4VHE4YQLqT+/rq0o/C3zftCNHrqNaEcJnFKhEUcn5LM9lok09M9VNOuVo3Gb+zHRcSTmd08W/lx/ee0UHB58VKqMXoF2fca2M1NJhijhPY=
 before_script: npm install -g grunt-cli

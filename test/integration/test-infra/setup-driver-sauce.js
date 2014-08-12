@@ -51,13 +51,19 @@ function setupSauceTunnel(name, key) {
  *                      tunnel.
  * @param {String} key The Sauce Labs account key to use to create the tunnel.
  * @param {String} jobId The Sauce Labs job identifier.
- * @param {Boolean} allPassed The test state to report for the given job.
+ * @param {Array} repot Test status data. Each element should be an object that
+ *                      defines (at a minimum) a `passed` attribute.
  *
  * @returns {Promise} An eventual value that will resolve when the request has
  *                    completed.
  */
-function annotateJob(name, key, jobId, allPassed) {
-  var body = JSON.stringify({ passed: allPassed });
+function annotateJob(name, key, jobId, report) {
+  var body = JSON.stringify({
+    passed: report.every(function(test) { return test.passed; }),
+    // Sauce Labs does not handle Array values for the `custom-data` attribute,
+    // so the report should be wrapped in an Object.
+    'custom-data': { report: report }
+  });
   var options = {
     hostname: 'saucelabs.com',
     path: '/rest/v1/' + name + '/jobs/' + jobId,
@@ -104,7 +110,7 @@ function annotateJob(name, key, jobId, allPassed) {
  *                            will be created prior to running the tests.
  */
 module.exports = function(name, key, browser, tunnelId, buildId) {
-  var allPassed = true;
+  var report = [];
   var capabilities;
 
   if (!tunnelId) {
@@ -134,9 +140,12 @@ module.exports = function(name, key, browser, tunnelId, buildId) {
   });
 
   afterEach(function() {
-    if (this.currentTest.state !== 'passed') {
-      allPassed = false;
-    }
+    var test = this.currentTest;
+
+    report.push({
+      title: test.title,
+      passed: test.state === 'passed'
+    });
   });
 
   after(function() {
@@ -144,7 +153,7 @@ module.exports = function(name, key, browser, tunnelId, buildId) {
 
     return this.driver.getSession()
       .then(function(session) {
-        return annotateJob(name, key, session.getId(), allPassed);
+        return annotateJob(name, key, session.getId(), report);
       });
   });
 };

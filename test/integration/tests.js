@@ -3,8 +3,8 @@ var assert = require('assert');
 
 var webdriver = require('selenium-webdriver');
 
-var setupDriver = require('./setup-driver');
-var setupPep = require('./setup-pep');
+var setupDriver = require('./test-infra/setup-driver');
+var setupPep = require('./test-infra/setup-pep');
 
 describe('jQuery.pep', function() {
   var driver;

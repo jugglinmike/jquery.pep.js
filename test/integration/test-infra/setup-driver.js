@@ -14,14 +14,16 @@ module.exports = function() {
     require('./setup-driver-local')();
   }
 
+  before(function() {
+    return require('./server')(8031).then(function(_server) {
+      server = _server;
+    });
+  });
+
   beforeEach(function() {
     // Create a local reference to the driver instance for use in cleanup in
     // case the context reference is mistakenly destroyed during testing.
     driver = this.driver;
-
-    return require('./server')(8031).then(function(_server) {
-      server = _server;
-    });
   });
 
   afterEach(function() {

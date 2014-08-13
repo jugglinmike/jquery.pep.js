@@ -51,7 +51,7 @@ describe('jQuery.pep', function() {
         }).then(function() {
           return driver.actions().mouseUp().perform();
         }).then(function() {
-          return pep.getLocation()
+          return pep.getLocation();
         }).then(function(newLocation) {
           assert.equal(origLocation.x + 10, newLocation.x);
           assert.equal(origLocation.y + 20, newLocation.y);

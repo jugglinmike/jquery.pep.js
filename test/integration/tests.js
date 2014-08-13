@@ -26,7 +26,7 @@ describe('jQuery.pep', function() {
 
     beforeEach(function() {
       return setupPep(driver, {
-          markup: '<div class="block pep"></div>',
+          markup: '<div class="block pep">O</div>',
         }).then(function(peps) {
           this.peps = peps;
         }.bind(this));

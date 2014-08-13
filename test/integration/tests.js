@@ -43,9 +43,10 @@ describe('jQuery.pep', function() {
             .mouseDown(pep)
             .mouseMove({ x: 10, y: 20 })
             .perform();
-        })
-        // Wait before dropping to ensure easing does not take place.
-        .then(function() {
+        }).then(function() {
+          // Wait before dropping to prevent intertial movement. This magic
+          // constant is unfortunate but unavoidable because there is no
+          // external indication of the "momentum" of a given element.
           return driver.sleep(500);
         }).then(function() {
           return driver.actions().mouseUp().perform();

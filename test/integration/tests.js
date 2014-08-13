@@ -22,12 +22,19 @@ describe('jQuery.pep', function() {
   });
 
   describe('default behavior', function() {
+    var start;
     this.timeout(15 * 1000);
+    var log = function(msg) {
+      console.log(msg, Date.now() - start);
+    };
 
     beforeEach(function() {
+      start = Date.now();
+      console.log('creating elements');
       return setupPep(driver, {
           markup: '<div class="block pep">O</div>',
         }).then(function(peps) {
+          log('elements created' + peps.length);
           this.peps = peps;
         }.bind(this));
     });
@@ -35,11 +42,8 @@ describe('jQuery.pep', function() {
     it('enables dragging and dropping', function() {
       var pep = this.peps[0];
       var origLocation;
-      var start = Date.now();
-      var log = function(msg) {
-        console.log(msg, Date.now() - start);
-      };
 
+      log('requesting location');
       return pep.getLocation()
         .then(function(location) {
           origLocation = location;
